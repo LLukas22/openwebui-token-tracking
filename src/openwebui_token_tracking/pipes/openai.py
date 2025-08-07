@@ -27,11 +27,11 @@ class OpenAITrackedPipe(BaseTrackedPipe):
             description="API key for authenticating requests to the OpenAI (or compatible) API.",
         )
         API_BASE_URL: str = Field(
-            default="https://api.openai.com/v1",
+            default_factory=lambda: os.getenv("OPENAI_API_BASE_URL", "https://api.openai.com/v1"),
             description="Base URL of the OpenAI (or compatible) API ",
         )
         PROVIDER: str = Field(
-            default="openai", description="Name of the model provider."
+            default_factory=lambda: os.getenv("OPENAI_PROVIDER", "openai"), description="Name of the model provider."
         )
         DEBUG: bool = Field(default=False)
 
